@@ -1,12 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
     <title>Rock Paper Scissors</title>
-</head>
-<body>
-    <h1>Piedra papel o tijera</h1>
+  </head>
+  <body>
+    <h1>Piedra, Papel o Tijera?</h1>
+    <div class="container">
+      <div class="tablero-user">
+        <h2>Player</h2>
+        <div class="info-score">
+          <img
+            width="60px"
+            height="60px"
+            src="assets/user-png.png"
+            alt="imagen user"
+          />
+          <p id="score-user">Score: 0</p>
+        </div>
+        <div class="options">
+          <div class="option" id="rock-user">
+            <p>Rock</p>
+            <img src="assets/piedra-png.png" alt="" />
+          </div>
+          <div class="option" id="paper-user">
+            <p>Paper</p>
+            <img src="assets/hoja-png.webp" alt="" />
+          </div>
+          <div class="option" id="scissors-user">
+            <p>Scissors</p>
+            <img src="assets/tijera-png.webp" alt="" />
+          </div>
+        </div>
+      </div>
+      <div class="tablero-user">
+        <h2>Computer</h2>
+        <div class="info-score">
+          <img
+            width="60px"
+            height="60px"
+            src="assets/robot-pgn.webp"
+            alt="imagen robot"
+          />
+          <p id="score-computer">Score: 0</p>
+        </div>
+        <div class="options">
+          <div class="option" id="rock-user">
+            <p>Rock</p>
+            <img src="assets/piedra-png.png" alt="" />
+          </div>
+          <div class="option" id="paper-user">
+            <p>Paper</p>
+            <img src="assets/hoja-png.webp" alt="" />
+          </div>
+          <div class="option" id="scissors-user">
+            <p>Scissors</p>
+            <img src="assets/tijera-png.webp" alt="" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal">
+      <div class="modal-content">
+        <p id="modal-message"></p>
+        <button id="modal-button">Play Again?</button>
+      </div>
+    </div>
     <script src="script.js"></script>
-</body>
+  </body>
 </html>

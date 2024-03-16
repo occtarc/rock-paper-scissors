@@ -1,61 +1,113 @@
+const rockUser = document.getElementById("rock-user");
+const paperUser = document.getElementById("paper-user");
+const scissorsUser = document.getElementById("scissors-user");
+const listaOptions = document.querySelectorAll(".option");
+const userScore = document.getElementById("score-user");
+const computerScore = document.getElementById("score-computer");
+const modal = document.querySelector(".modal");
+const modalMessage = document.getElementById("modal-message");
+const modalButton = document.getElementById("modal-button");
+let userPoints = 0;
+let computerPoints = 0;
 function getComputerChoice (){
     let computerArrayChoice = ["rock", "paper", "scissors"];
     return computerArrayChoice[Math.floor(Math.random()*3)]
 }
 
-function getPlayerChoice(){
-    let playerSelection;
-    do {
-        playerSelection = prompt("Ingresa rock, paper o scissors: ");
-        playerSelection = playerSelection.toLowerCase();
-    } while (playerSelection != "rock" && playerSelection != "paper" && playerSelection != "scissors");
-    return playerSelection
-}
-
 function playRound (computerSelection, playerSelection){
     if(computerSelection === "rock" && playerSelection === "scissors"){
         console.log("You Lose! Rock beats Scissors");
-        return 0;
+        computerPoints++;
+        computerScore.innerText = `Score: ${computerPoints}`;
+        listaOptions[3].style.backgroundColor = "#52BE80";
+        listaOptions[2].style.backgroundColor = "#EC7063"; 
     }else if (computerSelection === "paper" && playerSelection === "rock"){
         console.log("You Lose! Paper beats Rock");
-        return 0;
+        computerPoints++;
+        computerScore.innerText = `Score: ${computerPoints}`;
+        listaOptions[4].style.backgroundColor = "#52BE80";
+        listaOptions[0].style.backgroundColor = "#EC7063"; 
     }else if (computerSelection === "scissors" && playerSelection === "paper"){
         console.log("You Lose! Scissors beats Paper");
-        return 0;
+        computerPoints++;
+        computerScore.innerText = `Score: ${computerPoints}`;
+        listaOptions[5].style.backgroundColor = "#52BE80";
+        listaOptions[1].style.backgroundColor = "#EC7063"; 
     }else if (playerSelection === "rock" && computerSelection === "scissors"){
         console.log("You Win! Rock beats Scissors");
-        return 1;
+        userPoints++;
+        userScore.innerText = `Score: ${userPoints}`;
+        listaOptions[0].style.backgroundColor = "#52BE80";
+        listaOptions[5].style.backgroundColor = "#EC7063"; 
     }else if (playerSelection === "paper" && computerSelection === "rock"){
         console.log("You Win! Paper beats Rock");
-        return 1;
+        userPoints++;
+        userScore.innerText = `Score: ${userPoints}`;
+        listaOptions[1].style.backgroundColor = "#52BE80";
+        listaOptions[3].style.backgroundColor = "#EC7063"; 
     }else if (playerSelection === "scissors" && computerSelection === "paper"){
         console.log("You Win! Scissors beats Paper");
-        return 1;
-    }else{
+        userPoints++;
+        userScore.innerText = `Score: ${userPoints}`;
+        listaOptions[2].style.backgroundColor = "#52BE80";
+        listaOptions[4].style.backgroundColor = "#EC7063"; 
+    }else if (playerSelection === "rock" && computerSelection === "rock"){
         console.log("Tie");
-        return 2;
+        listaOptions[0].style.backgroundColor = "#2471A3";
+        listaOptions[3].style.backgroundColor = "#2471A3"; 
+    }else if (playerSelection === "paper" && computerSelection === "paper"){
+        console.log("Tie");
+        listaOptions[1].style.backgroundColor = "#2471A3";
+        listaOptions[4].style.backgroundColor = "#2471A3"; 
+    }else if (playerSelection === "scissors" && computerSelection === "scissors"){
+        console.log("Tie");
+        listaOptions[2].style.backgroundColor = "#2471A3";
+        listaOptions[5].style.backgroundColor = "#2471A3"; 
     }
-}
-
-function playGame(){
-    let computerWin = 0;
-    let userWin = 0;
-    let tie = 0;
-    for(i=0; i<5; i++){
-        const computerSelection = getComputerChoice();
-        const playerSelection = getPlayerChoice();
-        let result = playRound(computerSelection,playerSelection);
-        if(result === 0){
-            computerWin++;
-        }else if(result === 1){
-            userWin++;
+    if(userPoints === 5 || computerPoints === 5){
+        if(userPoints === 5){
+            showModal(`You Win! ${userPoints} - ${computerPoints}`);
         }else{
-            tie++;
+            showModal(`You Lost! ${userPoints} - ${computerPoints}`);
         }
     }
-    console.log("Resultados: \n");
-    console.log(`User: ${userWin} | Computer: ${computerWin} | Tie: ${tie}`);
 }
 
+function resetSquareColors() {
+    listaOptions.forEach(option => {
+        option.style.backgroundColor = "#D7BDE2";
+    });
+}
 
-playGame();
+function showModal(message){
+    modal.style.display = "block";
+    modalMessage.innerText = message;
+    modalButton.addEventListener("click", () => {
+        modal.style.display = "none";
+        resetGame();
+    })
+}
+
+function resetGame(){
+    userPoints = 0;
+    computerPoints = 0;
+    userScore.innerText = "Score: 0";
+    computerScore.innerText = "Score: 0";
+    resetSquareColors();
+}
+
+rockUser.addEventListener("click",() => {
+    resetSquareColors();
+    playRound(getComputerChoice(), "rock");
+})
+paperUser.addEventListener("click",() => {
+    resetSquareColors();
+    playRound(getComputerChoice(),"paper");
+})
+scissorsUser.addEventListener("click", () => {
+    resetSquareColors();
+    playRound(getComputerChoice(),"scissors")
+})
+
+
+
